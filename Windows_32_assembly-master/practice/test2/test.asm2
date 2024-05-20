@@ -1,0 +1,86 @@
+; 使用 nmake 或下列命令进行编译和链接:
+; ml /c /coff Receive.asm
+; Link /subsystem:windows Receive.obj
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		.386
+		.model flat,stdcall
+		option casemap:none
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; Include 文件定义
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+include		windows.inc
+include		gdi32.inc
+includelib	gdi32.lib
+include		user32.inc
+includelib	user32.lib
+include		kernel32.inc
+includelib	kernel32.lib
+
+
+counter equ 100h
+IDEDIT  equ		101h
+IDSTART equ  	102h
+IDRESET equ  	103h
+IDICON equ  	104h
+IDCURS equ  	105h
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 数据段
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		.data
+boxtitle db 'eax',0
+gdfname db 'gdf',0
+hIcon dd ?
+cnt dd ?
+		.data?
+hWinMain dd ?
+hInstance dd ?
+hgdf dd ?
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+; 代码段
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		.code
+_ProcDlgMain	proc	uses ebx edi esi hWnd,wMsg,wParam,lParam
+		mov	eax,wMsg
+		.if	eax ==	WM_CLOSE
+			invoke	EndDialog,hWinMain,0
+;********************************************************************
+		.elseif	eax ==	WM_INITDIALOG
+			push	hWnd
+			pop	hWinMain
+			invoke LoadIcon,hInstance,IDICON
+			invoke SendMessage,hWnd,WM_SETICON,ICON_BIG,eax
+			invoke LoadCursor,hInstance,IDCURS
+			invoke SetClassLong,hWnd,GCL_HCURSOR,eax
+			invoke SetDlgItemInt,hWinMain,IDEDIT,hgdf,FALSE
+			;invoke SetDlgItemText,hWnd,IDC_INFO,keychar
+;********************************************************************
+		.elseif	eax ==	WM_COMMAND
+			mov	eax,wParam
+			.if eax == IDSTART
+				invoke SetDlgItemInt,hWinMain,IDEDIT,99,FALSE
+			.elseif eax == IDRESET
+
+			.endif
+		; .elseif eax == WM_SETICON
+			
+;********************************************************************
+		.else
+			mov	eax,FALSE
+			ret
+		.endif
+		mov	eax,TRUE
+		ret
+
+_ProcDlgMain	endp
+
+start:
+		invoke GetModuleHandle,NULL
+		mov hInstance,eax
+		invoke FindWindow,NULL,offset gdfname
+		mov hgdf,eax
+		invoke DialogBoxParam,hInstance,counter,NULL,offset _ProcDlgMain,NULL
+		; invoke GetLastError
+		; invoke wsprintf,addr msg,addr formatmsg,eax
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		;invoke	ExitProcess,NULL
+		end	start
