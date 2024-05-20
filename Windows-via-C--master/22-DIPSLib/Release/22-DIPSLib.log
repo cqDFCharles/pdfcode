@@ -1,0 +1,7 @@
+﻿  DIPSLib.cpp
+    正在创建库 D:\vmimage\Windows-via-C--master\Release\22-DIPSLib.lib 和对象 D:\vmimage\Windows-via-C--master\Release\22-DIPSLib.exp
+  正在生成代码
+  Previous IPDB not found, fall back to full compilation.
+  All 7 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  22-DIPSLib.vcxproj -> D:\vmimage\Windows-via-C--master\Release\22-DIPSLib.dll
