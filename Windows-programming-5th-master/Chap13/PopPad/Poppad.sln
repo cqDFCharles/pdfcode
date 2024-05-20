@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PopPad", "PopPad.vcxproj", "{1A3FF2B4-7C0A-4213-8775-E23152112112}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A3FF2B4-7C0A-4213-8775-E23152112112}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1A3FF2B4-7C0A-4213-8775-E23152112112}.Debug|Win32.Build.0 = Debug|Win32
+		{1A3FF2B4-7C0A-4213-8775-E23152112112}.Release|Win32.ActiveCfg = Release|Win32
+		{1A3FF2B4-7C0A-4213-8775-E23152112112}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {331157BB-54C7-4809-8372-C5DB4009C260}
+	EndGlobalSection
+EndGlobal
